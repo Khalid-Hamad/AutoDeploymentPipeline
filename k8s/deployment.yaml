@@ -1,0 +1,25 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: myapp-deployment
+spec:
+  replicas: 1
+  #number of replicas generated
+  selector:
+    #assigns labels to the pods for future selection
+    matchLabels:
+      app: myapp
+      version: v01
+  template:
+    metadata:
+      labels:
+        app: myapp
+        version: v01
+    spec:
+      containers:
+      - name: myapp-container
+        image: ${dockerhub-username}/myapp:latest
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+      - name: regcred

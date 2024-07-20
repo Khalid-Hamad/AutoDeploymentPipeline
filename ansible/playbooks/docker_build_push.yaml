@@ -1,0 +1,10 @@
+- name: Build and push Docker image
+  hosts: localhost
+  tasks:
+    - name: Build Docker image
+      command: docker build -t ${dockerhub-username}/myapp:latest .
+      args:
+        chdir: ~/Git/AutoDeploymentPipeline/Docker/app
+
+    - name: Push Docker image to Docker Hub
+      command: docker push ${dockerhub-username}/myapp:latest
